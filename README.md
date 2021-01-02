@@ -33,7 +33,7 @@ All steps are executed via run-dwh.sh file which then calls dwh-main.py which ca
         "year": 0
     }
     ```
-* staging table `s_event` follow the structure of the log data:
+* staging table `s_events` follow the structure of the log data:
     ```
     {
         "artist":"Des'ree",
