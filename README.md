@@ -17,8 +17,8 @@ All steps are executed via run-dwh.sh file which then calls dwh-main.py which ca
 
 ![star schema](model.png)
 
-### Staging Tables - s_songs, s_events
-    * staging table s_songs follows the structure of the song data: 
+### Staging Tables - s_songs, s_events:
+* staging table s_songs follows the structure of the song data: 
     ```
     {
         "num_songs": 1, 
