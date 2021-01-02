@@ -33,7 +33,7 @@ All steps are executed via run-dwh.sh file which then calls dwh-main.py which ca
         "year": 0
     }
     ```
-    * staging table s_event follow the structure of the log data:
+* staging table s_event follow the structure of the log data:
     ```
     {
         "artist":"Des'ree",
@@ -56,30 +56,33 @@ All steps are executed via run-dwh.sh file which then calls dwh-main.py which ca
         "userId":"8"
     }
     ```
-    * the redshift `copy` command is used to enable fast loading of these files into their respective tables
+* the redshift `copy` command is used to enable fast loading of these files into their respective tables
 
 ### Fact Table f_songplays:
-    * using start_time as distkey as it is a very large dimenstion and it is likely to grow rapidly but evenly as we get more event data
-    * using start_time as sortkey to make "trend" analysis faster
+* using start_time as distkey as it is a very large dimenstion and it is likely to grow rapidly but evenly as we get more event data
+* using start_time as sortkey to make "trend" analysis faster
 
 ### Dimension Tables d_artists, d_users, d_songs and d_time:
-    * d_artists:
-        - each row describes a unique artist
-        - d_artists.artist_id is the primary key
-        - d_artists.name is sortkey, this is to aid with analysis of which artists / titles are trending
-    * d_users: 
-        - each row describes a unique user
-        - d_users.user_id is the primary key
-        - d_users.level is a sortkey to aid with analysis of who upgrades from "Free" to "Paid"
-    * d_songs:
-        - each row describes a unique song
-        - d_songs.song_id is a primary key
-        - d_songs.title is a sortkey to aid with analysis of which titles are trending
-    * d_time: 
-        - each row describes a unique timestamp found in the log data
-        - start_time (epoch time format) is primary key, sortkey and distkey
-        - distkey on start_time because we have that in the fact table f_songplays as well
-        - sortkey on start_time to aid with trending analysis  
+* d_artists:
+    - each row describes a unique artist
+    - d_artists.artist_id is the primary key
+    - d_artists.name is sortkey, this is to aid with analysis of which artists / titles are trending
+
+* d_users: 
+    - each row describes a unique user
+    - d_users.user_id is the primary key
+    - d_users.level is a sortkey to aid with analysis of who upgrades from "Free" to "Paid"
+
+* d_songs:
+    - each row describes a unique song
+    - d_songs.song_id is a primary key
+    - d_songs.title is a sortkey to aid with analysis of which titles are trending
+
+* d_time: 
+    - each row describes a unique timestamp found in the log data
+    - start_time (epoch time format) is primary key, sortkey and distkey
+    - distkey on start_time because we have that in the fact table f_songplays as well
+    - sortkey on start_time to aid with trending analysis  
 
 ## ETL Pipeline 
 
