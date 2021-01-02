@@ -2,7 +2,8 @@ import configparser
 
 
 
-# Try to load values from 
+# Try to load values from config file
+# values are used to populate some of the sql strings
 try:
     config = configparser.ConfigParser()
     config.read_file(open('dwh.cfg'))
@@ -209,6 +210,9 @@ d_time_table_insert = ("""
 """)
 
 # QUERY LISTS
+# these are now dictionaries instead of list to allow more feedback 
+# in particular, we can now tell which queiry is running and 
+# in case of a bug, narrow our investigation to that sql string
 
 create_table_queries = {
     's_events_table_create': s_events_table_create,

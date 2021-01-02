@@ -7,7 +7,11 @@ import psycopg2
 
 
 def get_config(config_file='dwh.cfg'):
-    
+    """
+        A function to get config object from file.
+        Returns None if it fails to retrieve the data from the file.
+    """
+
     try:
         
         config = configparser.ConfigParser()
@@ -20,7 +24,10 @@ def get_config(config_file='dwh.cfg'):
 
 
 def show_sql(sql_dict):
-    
+    """
+        A helper function used to show (print) the sql being executed. 
+        Very handing during development / debugging.
+    """
 
     for key in sql_dict:
         sql = sql_dict[key]
@@ -29,7 +36,11 @@ def show_sql(sql_dict):
 
 
 def run_sql(sql_dict):
-    
+    """
+        Gets database credentails, starts a psycopg client. 
+        Then iterates over a dictionary of sql statements, to execute each sql in the database
+        Commits at the end of the execution. 
+    """
     
     try:
         config = get_config()
@@ -57,7 +68,10 @@ def run_sql(sql_dict):
 
 
 def create_schema():
-
+    """
+        This function is called in main() to create the star schema in the database
+        It will try to drop existing tables before trying to re-create them.
+    """
     config = get_config()
     if not config:
         print(f"Config object is empty. Exiting program.")
@@ -68,7 +82,9 @@ def create_schema():
 
 
 def do_etl():
-
+    """
+        This function is called in main() to perform the ETL tasks
+    """
     config = get_config()
     if not config:
         print(f"Config object is empty. Exiting program.")
@@ -78,6 +94,9 @@ def do_etl():
     run_sql(insert_table_queries)
 
 def print_usage():
+    """
+        A helper function to print "usage" text to stdout
+    """
     print("Usage: run-dwh.sh <create_schema|do_etl>")
     print("create_schema: drops table if exist before creating them")
     print("do_etl: loads data into staging tables, then loads fact and dimension tables from staging tables.")
@@ -86,8 +105,11 @@ def print_usage():
 
 
 def main(argv):
+    """
+        As the name suggests, execution starts here
+        Uses sys.argv[1] to determine which "user_command" to execute.
+    """
     print(f"*** start - {datetime.now()} ***")
-
 
     try:
         user_command = argv[1]
