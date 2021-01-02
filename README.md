@@ -95,7 +95,7 @@ All steps are executed via run-dwh.sh file which then calls dwh-main.py which ca
 
 ### Create your own Redshift cluster on AWS
 * create your own redshift cluster by going into AWS Console or using AWS CLI
-* You can also use my [aws-iac-redshift]('https://github.com/firozkabir/aws-iac-redshift/blob/main/README.md') project to create a cluster using Infrastructure as Code. 
+* You can also use my [aws-iac-redshift]('https://github.com/firozkabir/aws-iac-redshift') project to create a cluster using Infrastructure as Code. 
 
 
 
