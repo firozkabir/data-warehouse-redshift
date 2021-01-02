@@ -115,7 +115,7 @@ DB_PASSWORD=
 DB_PORT=
 
 [IAM_ROLE]
-ARN=''
+ARN=
 
 [S3]
 LOG_DATA='s3://udacity-dend/log_data'
