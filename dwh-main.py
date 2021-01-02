@@ -77,12 +77,23 @@ def do_etl():
     run_sql(copy_table_queries)
     run_sql(insert_table_queries)
 
+def print_usage():
+    print("Usage: run-dwh.sh <create_schema|do_etl>")
+    print("create_schema: drops table if exist before creating them")
+    print("do_etl: loads data into staging tables, then loads fact and dimension tables from staging tables.")
+    print("Be sure to add all the necessary values in dwh.cfg")
+
+
 
 def main(argv):
     print(f"*** start - {datetime.now()} ***")
 
 
-    user_command = argv[1]
+    try:
+        user_command = argv[1]
+    except Exception as e:
+        print("At least one argument is required.")
+        user_command = ''
 
     if user_command == 'create_schema':
         create_schema()
@@ -91,8 +102,7 @@ def main(argv):
         do_etl()
     
     else:
-        pass
-
+        print_usage()
     
 
 
